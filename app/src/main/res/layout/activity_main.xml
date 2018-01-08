@@ -1,42 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation= "vertical"
-    tools:context="frms.localsqlapp.FormActivity">
+    android:orientation="vertical"
+    tools:context="frms.localsqlapp.MainActivity">
 
 
-    <TextView
-        android:id="@+id/textVName"
-        android:layout_width="341dp"
-        android:layout_height="35dp"
-        android:layout_weight="1"
-        android:text="Name" />
-
-    <TextView
-        android:id="@+id/textVSurname"
-        android:layout_width="338dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Surname" />
-
-    <EditText
-        android:id="@+id/textVEmail"
-        android:layout_width="338dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
 
     <Button
-        android:id="@+id/textValide"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonAddContact"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Valide"
-        android:onClick="onValide"/>
+        android:text="New Contact"
+        android:onClick="onAddContact">
 
+    </Button>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -10,21 +10,23 @@
 
     <TextView
         android:id="@+id/textVName"
-        android:layout_width="341dp"
-        android:layout_height="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:ems="10"
         android:text="Name" />
 
     <TextView
         android:id="@+id/textVSurname"
-        android:layout_width="338dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:ems="10"
         android:text="Surname" />
 
     <EditText
         android:id="@+id/textVEmail"
-        android:layout_width="338dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
