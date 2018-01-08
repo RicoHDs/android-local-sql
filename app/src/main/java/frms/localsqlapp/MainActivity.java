@@ -1,9 +1,17 @@
 package frms.localsqlapp;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import fr.sm.datab.DataBase.DataBaseHandler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +30,24 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+
+    }
+    private List<Map<String, String>> getAllContacts(){
+  // instancie à la base de donnée
+        DataBaseHandler db= new DataBaseHandler(this);
+
+        // Excute une requete de selection
+        Cursor cursor = db.getReadableDatabase().rawQuery("SELECT * FROM contacts", null);
+
+        //Instencie la liste
+        List<Map<String, String>> contactList = new ArrayList<>();
+        Map<String, String> contactCole  = new HashMap<>();
+
+
+
+
+
+        return contactList;
 
     }
 }
