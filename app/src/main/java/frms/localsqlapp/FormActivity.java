@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import fr.sm.datab.DataBase.DataBaseHandler;
 
@@ -43,6 +44,7 @@ public class FormActivity extends AppCompatActivity {
         insertValues.put("email", email);
         try{
         db.getReadableDatabase().insert("contacts", null,insertValues );
+            Toast.makeText()
 
 
             }
