@@ -1,9 +1,9 @@
 package frms.localsqlapp;
 
 import android.content.ContentValues;
-import android.database.DatabaseErrorHandler;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +21,11 @@ public class FormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
+
+        android.app.ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
     }
     public  void onValide(View v){
         //ref du bouton
@@ -46,6 +51,10 @@ public class FormActivity extends AppCompatActivity {
         db.getReadableDatabase().insert("contacts", null,insertValues );
             Toast.makeText(this, "Données enregistrées", Toast.LENGTH_LONG).show();
 
+
+            ((EditText) findViewById(R.id.textName)).setText("");
+            ((EditText) findViewById(R.id.textSurname)).setText("");
+            ((EditText) findViewById(R.id.textEmail)).setText("");
         }
             catch (SQLException ex){
                 Log.e( "SQL EXCEPTION", ex.getMessage());
