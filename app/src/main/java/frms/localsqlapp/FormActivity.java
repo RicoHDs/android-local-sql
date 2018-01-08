@@ -44,10 +44,9 @@ public class FormActivity extends AppCompatActivity {
         insertValues.put("email", email);
         try{
         db.getReadableDatabase().insert("contacts", null,insertValues );
-            Toast.makeText()
+            Toast.makeText(this, "Données enregistrées", Toast.LENGTH_LONG).show();
 
-
-            }
+        }
             catch (SQLException ex){
                 Log.e( "SQL EXCEPTION", ex.getMessage());
             }
