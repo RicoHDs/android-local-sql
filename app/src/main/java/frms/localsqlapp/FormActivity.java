@@ -13,6 +13,8 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form);
     }
     public  void onValide(View v){
+        //ref du bouton
         Button clickButton =(Button) v;
+
     }
 }
