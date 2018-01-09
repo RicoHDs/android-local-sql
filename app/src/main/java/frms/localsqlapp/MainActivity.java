@@ -1,5 +1,6 @@
 package frms.localsqlapp;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
    private ListView contactListView;
    private List<Map<String, String>> contactList;
+   private  Integer selectedIndex;
+   private Map<String, String>selectedRemote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         ContactArrayAdapter contactAdapter = new ContactArrayAdapter(this, contactList);
 
         contactListView.setAdapter(contactAdapter);
+
 
 
     }
