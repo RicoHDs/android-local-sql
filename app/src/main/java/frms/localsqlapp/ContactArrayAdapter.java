@@ -49,10 +49,10 @@ public class ContactArrayAdapter extends ArrayAdapter {
         nameTextView.setText(contactData.get("name"));
 
         TextView surnameTextViewButtonTextView = view.findViewById(R.id.ListtextSurnamebutton);
-        nameTextView.setText(contactData.get("surname"));
+        surnameTextViewButtonTextView.setText(contactData.get("surname"));
 
         TextView emailTextViewButtonTextView = view.findViewById(R.id.textEmail);
-        nameTextView.setText(contactData.get("email"));
+        emailTextViewButtonTextView.setText(contactData.get("email"));
 
         return view;
     }

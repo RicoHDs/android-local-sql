@@ -1,12 +1,16 @@
 package frms.localsqlapp;
 
-import android.content.ContentValues;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.ClientCertRequest;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,12 +19,12 @@ import java.util.Map;
 
 import fr.sm.datab.DataBase.DataBaseHandler;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
    private ListView contactListView;
    private List<Map<String, String>> contactList;
    private  Integer selectedIndex;
-   private Map<String, String>selectedRemote;
+   private Map<String, String>selectedPerson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         ContactArrayAdapter contactAdapter = new ContactArrayAdapter(this, contactList);
 
         contactListView.setAdapter(contactAdapter);
-
+        contactListView.setOnItemClickListener(this);
 
 
     }
@@ -71,5 +75,12 @@ public class MainActivity extends AppCompatActivity {
 
         return contactList;
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        this.selectedIndex = position;
+        this.selectedPerson = contactList.get(position);
+        Toast.makeText(this,"Ligne" + position+ "cliquer", Toast.LENGTH_SHORT) ;
     }
 }
