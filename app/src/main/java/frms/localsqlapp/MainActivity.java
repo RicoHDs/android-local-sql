@@ -4,6 +4,8 @@ package frms.localsqlapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,12 +37,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
         contactListView =  findViewById(R.id.contactListView);
-        contactList = this.getAllContacts();
-
-        ContactArrayAdapter contactAdapter = new ContactArrayAdapter(this, contactList);
-
-        contactListView.setAdapter(contactAdapter);
-        contactListView.setOnItemClickListener(this);
+        contactListInit();
 
         //Button bt = findViewById(R.id.buttonBdon);
         //getMenuInflater().inflate(R.menu.main_option_menu, bt);
@@ -48,6 +45,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
 
+    }
+
+    private void contactListInit() {
+        contactList = this.getAllContacts();
+
+        ContactArrayAdapter contactAdapter = new ContactArrayAdapter(this, contactList);
+
+        contactListView.setAdapter(contactAdapter);
+        contactListView.setOnItemClickListener(this);
     }
 
     @Override
@@ -61,15 +67,48 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch ((item.getItemId())){
-            case R.id.mainMenuOptionDelete:
 
-            break;
+        switch ( item.getItemId() ) {
+            case R.id.mainMenuOptionDelete:
+                this.deleteSelectedContact();
+                break;
             case R.id.mainMenuOptionEdit:
+
                 break;
         }
+
         return true;
     }
+
+    //suppression du contact selectionné
+    private void deleteSelectedContact() {
+
+        if(this.selectedIndex != null) {
+
+            try {
+
+                String sql = "DELETE FROM contacts WHERE id=?";
+                String[] params = {this.selectedPerson.get("id")};
+
+                DataBaseHandler db = new DataBaseHandler(this);
+                db.getWritableDatabase().execSQL(sql, params);
+                //Réinitialisation de la liste des contacts
+                this.ContactListInit();
+
+            } catch (SQLiteException ex) {
+                Toast.makeText(this, "Impossible de supprimer", Toast.LENGTH_LONG).show();
+            }
+
+        } else {
+            Toast.makeText(this, "Vous devez selectionner un contact", Toast.LENGTH_LONG).show();
+        }
+
+    }
+    private void ContactListInit() {
+        //Récupération de la liste des contacts
+        contactListInit();
+    }
+
 
     public void onAddContact(View view) {
         if (view==findViewById(R.id.buttonAddContact)){
@@ -85,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         DataBaseHandler db= new DataBaseHandler(this);
 
         // Excute une requete de selection
-        Cursor cursor = db.getReadableDatabase().rawQuery("SELECT * FROM contacts", null);
+        Cursor cursor = db.getReadableDatabase().rawQuery("SELECT name, surname, email, id FROM contacts", null);
 
         //Instencie la liste
         List<Map<String, String>> contactList = new ArrayList<>();
@@ -96,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             contactCole.put("name", cursor.getString(0));
             contactCole.put("surname", cursor.getString(1));
             contactCole.put("email", cursor.getString(2));
+            contactCole.put("id", cursor.getString(3));
 
             // ajouter du map à mon Array List
             contactList.add(contactCole);
