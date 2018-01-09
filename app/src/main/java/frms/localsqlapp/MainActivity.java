@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,10 +16,20 @@ import fr.sm.datab.DataBase.DataBaseHandler;
 
 public class MainActivity extends AppCompatActivity {
 
+   private ListView contactListView;
+   private List<Map<String, String>> contactList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        contactListView =  findViewById(R.id.contactListView);
+        contactList = this.getAllContacts();
+
+        ContactArrayAdapter contactAdapter = new ContactArrayAdapter(this, contactList);
+
+        contactListView.setAdapter(contactAdapter);
 
 
     }
@@ -46,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         while (cursor.moveToNext()){
             Map<String, String> contactCole  = new HashMap<>();
             contactCole.put("name", cursor.getString(0));
-            contactCole.put("Surname", cursor.getString(1));
+            contactCole.put("surname", cursor.getString(1));
             contactCole.put("email", cursor.getString(2));
 
             // ajouter du map à mon Array List

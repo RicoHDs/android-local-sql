@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/textSurname"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/textEmail"
