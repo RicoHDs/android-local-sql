@@ -41,11 +41,18 @@ public class MainActivity extends AppCompatActivity {
 
         //Instencie la liste
         List<Map<String, String>> contactList = new ArrayList<>();
-        Map<String, String> contactCole  = new HashMap<>();
 
 
+        while (cursor.moveToNext()){
+            Map<String, String> contactCole  = new HashMap<>();
+            contactCole.put("name", cursor.getString(0));
+            contactCole.put("Surname", cursor.getString(1));
+            contactCole.put("email", cursor.getString(2));
 
+            // ajouter du map à mon Array List
+            contactList.add(contactCole);
 
+        }
 
         return contactList;
 
