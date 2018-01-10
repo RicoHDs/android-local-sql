@@ -63,7 +63,7 @@ public class ContactDAO {
             String sql = "DELETE FROM contacts WHERE id=?";
             this.db.getWritableDatabase().execSQL(sql,params);
         }
-    public  void  persist(Contact entity) {
+    public  void  persist (Contact entity) {
         if (entity.getId() == null) {
             this.insert(entity);
 
