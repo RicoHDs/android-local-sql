@@ -25,14 +25,17 @@ import java.util.List;
 import java.util.Map;
 
 import fr.sm.datab.DataBase.DataBaseHandler;
+import frms.localsqlapp.model.Contact;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView contactListView;
-    private List<Map<String, String>> contactList;
+    private List<Contact> contactList;
     private Integer selectedIndex;
-    private Map<String, String> selectedPerson;
+    private Contact selectedPerson;
     private final String LIFE_CYCLE="cycle de vie";
+    private DataBaseHandler db;
+    private ContactDAO dao;
     //private contactAdapter
 
     @Override
@@ -41,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.db = new DataBaseHandler(this);
+
+        this.dao = new ContactDAO(this.db);
 
         contactListView = findViewById(R.id.contactListView);
         contactListInit();
@@ -236,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     outState.putInt("SelectedIndex", this.selectedIndex);
         super.onSaveInstanceState(outState);
     }
+
 
 }
 

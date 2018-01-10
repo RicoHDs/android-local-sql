@@ -14,6 +14,8 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.Map;
 
+import frms.localsqlapp.model.Contact;
+
 /**
  * Created by Formation on 09/01/2018.
  */
@@ -21,12 +23,12 @@ import java.util.Map;
 public class ContactArrayAdapter extends ArrayAdapter {
 
     private Activity context;
-    private List<Map<String, String>>data;
+    private List<Contact> data;
    // private int resource;
     private LayoutInflater Inflater;
 
 
-    public ContactArrayAdapter(Context context, @NonNull List<Map<String, String>> data) {
+    public ContactArrayAdapter(Context context, @NonNull List<Contact> data) {
         super(context, 0, data);
 
         this.data = data;
@@ -43,16 +45,16 @@ public class ContactArrayAdapter extends ArrayAdapter {
                         @NonNull ViewGroup parent) {
         View view = this.Inflater.inflate(R.layout.listview_contacts, parent, false);
 
-        Map<String, String> contactData = this.data.get(position);
+        Contact contactData = this.data.get(position);
 
         TextView nameTextView = view.findViewById(R.id.textName);
-        nameTextView.setText(contactData.get("name"));
+        nameTextView.setText(contactData.getName());
 
         TextView surnameTextViewButtonTextView = view.findViewById(R.id.ListtextSurnamebutton);
-        surnameTextViewButtonTextView.setText(contactData.get("surname"));
+        surnameTextViewButtonTextView.setText(contactData.getSurname());
 
         TextView emailTextViewButtonTextView = view.findViewById(R.id.textEmail);
-        emailTextViewButtonTextView.setText(contactData.get("email"));
+        emailTextViewButtonTextView.setText(contactData.getEmail());
 
         return view;
     }
