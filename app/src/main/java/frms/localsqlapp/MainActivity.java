@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 this.deleteSelectedContact();
                 break;
             case R.id.mainMenuOptionEdit:
+                this.editSelectedContact();
 
                 break;
         }
@@ -102,15 +103,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void editSelectedContact() {
+        if (this.selectedIndex != null){
         Intent intention = new Intent(this, FormActivity.class);
 
-        intention.putExtra("data", this.selectedPerson.getId());
-        intention.putExtra("data", this.selectedPerson.getName());
-        intention.putExtra("data", this.selectedPerson.getSurname());
-        intention.putExtra("data", this.selectedPerson.getEmail());
+        intention.putExtra("id", String.valueOf(this.selectedPerson.getId()));
+        intention.putExtra("name", this.selectedPerson.getName());
+        intention.putExtra("surname", this.selectedPerson.getSurname());
+        intention.putExtra("email", this.selectedPerson.getEmail());
 
         startActivityForResult(intention, 1);
-    }
+    }}
 
     //suppression du contact selectionné
     private void deleteSelectedContact() {
@@ -240,10 +242,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 // Persistance des données après destruction de l'activité
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-    outState.putInt("SelectedIndex", this.selectedIndex);
+        if (this.selectedIndex != null)
+            outState.putInt("SelectedIndex", this.selectedIndex);
+
         super.onSaveInstanceState(outState);
-    }
+    }}
 
 
-}
+
 
