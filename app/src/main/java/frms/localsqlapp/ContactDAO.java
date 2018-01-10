@@ -55,5 +55,11 @@ public class ContactDAO {
             cursor.close();
             return contactList;
         }
+        //Suression simple en fonction de sa clé primaire
+        public void deleteOneById(Long id) throws  SQLException{
+            String[] params = {id.toString()};
+            String sql = "DELETE FROM contacts WHERE id=?";
+            this.db.getWritableDatabase().execSQL(sql,params);
+        }
     }
 

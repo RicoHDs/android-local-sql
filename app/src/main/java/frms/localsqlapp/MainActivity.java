@@ -121,11 +121,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             try {
 
-                String sql = "DELETE FROM contacts WHERE id=?";
-                String[] params = {String.valueOf(this.selectedPerson.getId())};
-
-                DataBaseHandler db = new DataBaseHandler(this);
-                db.getWritableDatabase().execSQL(sql, params);
+               this.dao.deleteOneById(Long.valueOf(this.selectedIndex));
                 //Réinitialisation de la liste des contacts
                 this.ContactListInit();
 
