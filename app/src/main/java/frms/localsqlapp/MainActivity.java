@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void contactListInit() {
-        contactList = this.getAllContacts();
+        contactList = this.dao.findAll();
 
         ContactArrayAdapter contactAdapter = new ContactArrayAdapter(this, contactList);
 
@@ -104,10 +104,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void editSelectedContact() {
         Intent intention = new Intent(this, FormActivity.class);
 
-        intention.putExtra("data", this.selectedPerson.get("id"));
-        intention.putExtra("data", this.selectedPerson.get("name"));
-        intention.putExtra("data", this.selectedPerson.get("surname"));
-        intention.putExtra("data", this.selectedPerson.get("email"));
+        intention.putExtra("data", this.selectedPerson.getId());
+        intention.putExtra("data", this.selectedPerson.getName());
+        intention.putExtra("data", this.selectedPerson.getSurname());
+        intention.putExtra("data", this.selectedPerson.getEmail());
 
         startActivityForResult(intention, 1);
     }
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             try {
 
                 String sql = "DELETE FROM contacts WHERE id=?";
-                String[] params = {this.selectedPerson.get("id")};
+                String[] params = {String.valueOf(this.selectedPerson.getId())};
 
                 DataBaseHandler db = new DataBaseHandler(this);
                 db.getWritableDatabase().execSQL(sql, params);
