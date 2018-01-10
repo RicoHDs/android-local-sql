@@ -1,5 +1,6 @@
 package frms.localsqlapp;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import fr.sm.datab.DataBase.DataBaseHandler;
 import android.database.SQLException;
@@ -15,6 +16,7 @@ import frms.localsqlapp.model.Contact;
 
 public class ContactDAO {
     private DataBaseHandler db;
+    private  Long id;
 
     public ContactDAO(DataBaseHandler db){
         this.db=db;
@@ -35,7 +37,7 @@ public class ContactDAO {
 
     private Contact hydrateContact(Cursor cursor) {
         Contact contact = new Contact();
-        contact.setId(cursor.getInt(0));
+        contact.setId((long) cursor.getInt(0));
         contact.setName(cursor.getString(1));
         contact.setSurname(cursor.getString(2));
         contact.setEmail(cursor.getString(3));
@@ -61,5 +63,30 @@ public class ContactDAO {
             String sql = "DELETE FROM contacts WHERE id=?";
             this.db.getWritableDatabase().execSQL(sql,params);
         }
+    public  void  persist(Contact entity) {
+        if (entity.getId() == null) {
+            this.insert(entity);
+
+        } else {
+            this.update(entity);
+        }
+    }
+    private  ContentValues getContentValuesFromEntity(Contact entity){
+        ContentValues values = new ContentValues();
+        values.put("name", entity.getName());
+        values.put("surname", entity.getSurname());
+        values.put("email", entity.getEmail());
+
+        return  values;
+    }
+    private  void  insert(Contact entity){
+        Long id = this.db.getWritableDatabase().insert("contacts", null, this.getContentValuesFromEntity(entity));
+        entity.setId(id);
+    }
+    private void update(Contact entity){
+        String[] params = {entity.getId().toString()};
+        this.db.getWritableDatabase().update("contacts", this.getContentValuesFromEntity(entity),"id=?",params);
+
+    }
     }
 

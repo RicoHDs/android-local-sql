@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private final String LIFE_CYCLE="cycle de vie";
     private DataBaseHandler db;
     private ContactDAO dao;
+
     //private contactAdapter
 
     @Override
@@ -217,7 +218,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             outState.putInt("SelectedIndex", this.selectedIndex);
 
         super.onSaveInstanceState(outState);
-    }}
+    }
+
+    }
+
 
 
 
