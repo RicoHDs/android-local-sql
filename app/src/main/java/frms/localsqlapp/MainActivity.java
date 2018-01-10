@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Integer selectedIndex;
     private Map<String, String> selectedPerson;
     private final String LIFE_CYCLE="cycle de vie";
+    //private contactAdapter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +44,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         contactListView = findViewById(R.id.contactListView);
         contactListInit();
-
+// récuperation des données dans le bundle
         //Button bt = findViewById(R.id.buttonBdon);
         //getMenuInflater().inflate(R.menu.main_option_menu, bt);
+   if(savedInstanceState != null){
+       this.selectedIndex = savedInstanceState.getInt("selectedIndex");
+       if (this.selectedIndex != null){
+           this.selectedPerson = this.contactList.get(this.selectedIndex);
 
+         //  contactListView.requestFocus();
+           contactListView.setSelection(this.selectedIndex);
+
+           Log.i(LIFE_CYCLE, "selection :" +  contactListView.getSelectedItemId());
+       }
+   }
 
     }
 
@@ -219,11 +230,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onDestroy();
         Log.i(LIFE_CYCLE, "onDestroy");
 }
-
+// Persistance des données après destruction de l'activité
     @Override
     protected void onSaveInstanceState(Bundle outState) {
     outState.putInt("SelectedIndex", this.selectedIndex);
         super.onSaveInstanceState(outState);
     }
+
 }
 
