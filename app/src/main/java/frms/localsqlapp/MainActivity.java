@@ -167,32 +167,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    private List<Map<String, String>> getAllContacts() {
-        // instancie à la base de donnée
-        DataBaseHandler db = new DataBaseHandler(this);
 
-        // Excute une requete de selection
-        Cursor cursor = db.getReadableDatabase().rawQuery("SELECT name, surname, email, id FROM contacts", null);
-
-        //Instencie la liste
-        List<Map<String, String>> contactList = new ArrayList<>();
-
-
-        while (cursor.moveToNext()) {
-            Map<String, String> contactCole = new HashMap<>();
-            contactCole.put("name", cursor.getString(0));
-            contactCole.put("surname", cursor.getString(1));
-            contactCole.put("email", cursor.getString(2));
-            contactCole.put("id", cursor.getString(3));
-
-            // ajouter du map à mon Array List
-            contactList.add(contactCole);
-
-        }
-
-        return contactList;
-
-    }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
